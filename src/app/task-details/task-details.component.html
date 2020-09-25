@@ -1,0 +1,49 @@
+<h2>Task Details</h2>
+
+<hr/>
+<div *ngIf="task" class="row">
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Desciption</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <td> {{task.id}}</td>
+      <td>{{task.description}}</td>
+      <td><button (click)="update()" class="btn btn-info">Update</button>
+        <button (click)="deleteTask(task.id)" class="btn btn-danger" style="margin-left: 10px">Delete</button></td>
+    </table>
+    <div>
+    </div>
+
+    <br>
+    <br>
+    <button (click)="list()" class="btn btn-primary">Back to Tasks List</button><br>
+
+    <div [hidden]="!updateState">
+      <h3>Update Task</h3>
+      <div style="width: 400px;">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" required [(ngModel)]="task.id" name="id">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" required [(ngModel)]="task.description" name="description">
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <div class="row" >
+      <h2><a routerLinkActive="active" routerLink="/tasks">Tasks List</a></h2>
+      <button style="margin: 10px;" (click)="addNewTask()" class="btn btn-dark">Add new Task</button>
+    </div>
+  </div>
+  <div class="panel-body" STYLE="margin: 10px; width: 1000px;">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Desciption</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let task of tasks | async">
+        <td>{{task.id}}</td>
+        <td>{{task.description}}</td>
+        <td><button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
+          <button class="btn btn-info" style="margin-left: 10px"><a [routerLink]="['/details', task.id]">Details</a></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div [hidden]="addTask" style="margin-right: 50px; " class="col-6 col-md-4">
+      <h3>Create Task</h3>
+      <div [hidden]="submitted" style="width: 400px; ">
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" required [(ngModel)]="task.id" name="id">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" required [(ngModel)]="task.description" name="description">
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
+      <div [hidden]="!submitted">
+        <h4>You submitted successfully!</h4>
+      </div>
+    </div>
+
+
+
+</div>
+</div>
+
+
+
