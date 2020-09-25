@@ -1,3 +1,4 @@
+<div class="container">
 <div class="panel panel-primary">
   <div class="panel-heading">
     <div class="row" >
@@ -20,13 +21,14 @@
         <td>{{task.description}}</td>
         <td><button (click)="deleteTask(task.id)" class="btn btn-danger">Delete</button>
           <button class="btn btn-info" style="margin-left: 10px"><a [routerLink]="['/details', task.id]">Details</a></button>
+          <button (click)="update(task.id)" class="btn btn-dark" style="margin-left: 10px">Update</button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
-
+</div>
 <div class="container">
   <div class="row">
     <div [hidden]="addTask" style="margin-right: 50px; " class="col-6 col-md-4">
@@ -51,9 +53,31 @@
       </div>
     </div>
 
+      <div [hidden]="!updateState">
+        <h3>Update Task</h3>
+        <div style="width: 400px;">
+          <form (ngSubmit)="onSubmitEdit()">
+            <div class="form-group">
+              <label for="id">ID</label>
+              <input type="text" class="form-control" id="id1" required [(ngModel)]="task.id" name="id1">
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description1" required [(ngModel)]="task.description" name="description1">
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+        </div>
+        <div>
+        </div>
+      </div>
+
 
 
 </div>
+
 </div>
 
 

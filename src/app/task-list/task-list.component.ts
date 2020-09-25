@@ -14,6 +14,8 @@ export class TaskListComponent implements OnInit {
   addTask: boolean ;
   task: Task = new Task();
   submitted = false;
+  updateState = false;
+  id:string;
 
 
 
@@ -23,6 +25,28 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.reloadData();
     this.addTask = true;
+    this.updateState = true;
+  }
+  //update section
+  update(id): void {
+    this.taskService.getTask(id)
+      .subscribe(data => {
+        console.log(data);
+        this.task = data;
+      }, error => console.log(error));
+    this.updateState = !this.updateState;
+    this.id = this.task.id;
+  }
+  updateTask(): void{
+    this.taskService.updateTask(this.id, this.task)
+      .subscribe(data => {
+        console.log(data);
+        this.task = new Task();
+        this.gotoList();
+      }, error => console.log(error));
+  }
+  onSubmitEdit(): void{
+    this.updateTask();
   }
   // tslint:disable-next-line:typedef
   reloadData() {
@@ -43,7 +67,7 @@ export class TaskListComponent implements OnInit {
   taskDetails(id: string) {
     this.router.navigate(['details' , id]);
   }
-
+// add task
   addNewTask(): void {
     this.addTask = !this.addTask;
   }
